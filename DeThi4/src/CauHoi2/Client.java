@@ -6,12 +6,14 @@ import java.net.InetAddress;
 
 public class Client {
     public static void main(String[] args) {
-        try (DatagramSocket clientSocket = new DatagramSocket()) {
+        try (
+            DatagramSocket clientSocket = new DatagramSocket()) {
             InetAddress serverAddress = InetAddress.getByName("localhost");
             int serverPort = 9999;
+            
             String fileName = "DuLieuDeThi.txt";
-
             byte[] sendData = fileName.getBytes();
+            
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, serverAddress, serverPort);
             clientSocket.send(sendPacket);
 
@@ -21,6 +23,7 @@ public class Client {
 
             String result = new String(receivePacket.getData()).trim();
             System.out.println("Client hiển thị:\n" + result);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
